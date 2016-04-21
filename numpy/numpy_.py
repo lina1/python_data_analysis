@@ -111,12 +111,41 @@ print x
 
 print x[np.array([True, False, True, False, False])]
 
-x[np.array([True, False, True])] = -1, -2, -3
-print x
+# x[np.array([True, False, True])] = -1, -2, -3
+# print x
 
 x = np.random.rand(10)
 print x
-print x[x>0.5]
+print x[x > 0.5]
+
+
+# 多维数组
+a = np.arange(0, 60, 10).reshape(-1, 1) + np.arange(0, 6)
+print a
+print a[0, 3:5]
+print a[4:, 4:]
+print a[:, 2]
+print a[2::2, ::2]
+
+
+print a[(0, 1, 2, 3, 4), (1, 2, 3, 4, 5)]
+print a[3:, (0, 2, 5)]
+
+mask = np.array([1, 0, 0, 1, 0, 0], dtype=np.bool)
+print a[mask, 2]
+
+persontype = np.dtype({
+    'names': ['name', 'age', 'weight'],
+    'formats': ['S32', 'i', 'f']
+})
+
+a = np.array([("Zhang", 32, 75.5), ("Wang", 24, 65.2)], dtype=persontype)
+print a
+print a.dtype
+
+c = a[1]
+c["name"] = "Li"
+print a[1]["name"]
 
 
 
