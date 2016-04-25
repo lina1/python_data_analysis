@@ -5,6 +5,8 @@ __author__ = 'lina'
 __date__ = '16/4/20'
 
 import numpy as np
+import time
+import math
 
 # 创建
 a = np.array([1, 2, 3, 4])
@@ -147,6 +149,41 @@ c = a[1]
 c["name"] = "Li"
 print a[1]["name"]
 
+# ufunc运算, 能对数组的每个元素进行操作
 
+# 计算后x的值没有变
+x = np.linspace(0, 2*np.pi, 10)
+y = np.sin(x)
+print x
+print y
+
+
+# 将被覆盖的数组作为第二个参数传给ufunc, 计算后x的值会改变
+t = np.sin(x, x)
+print x
+print t
+print id(x) == id(t)
+
+# numpy.math 和 python标准库math.sin计算速度
+
+x = [i * 0.001 for i in xrange(1000000)]
+start = time.clock()
+for i, t in enumerate(x):
+    x[i] = math.sin(t)
+
+print "math.sin:", time.clock() - start
+
+x = [i * 0.001 for i in xrange(1000000)]
+x = np.array(x)
+start = time.clock()
+np.sin(x, x)
+print "numpy.sin: ", time.clock() - start
+
+# 对单个值进行计算
+x = [i * 0.001 for i in xrange(1000000)]
+start = time.clock()
+for i, t in enumerate(x):
+    x[i] = np.sin(t)
+print "numpy.sin loop: ", time.clock() - start
 
 
