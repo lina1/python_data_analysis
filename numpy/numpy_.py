@@ -187,3 +187,76 @@ for i, t in enumerate(x):
 print "numpy.sin loop: ", time.clock() - start
 
 
+def triangle_wave(x, c, c0, hc):
+
+    x -= int(x)
+    if x >= c:
+        r = 0.0
+
+    elif x < c0:
+        r = x / c0 * hc
+
+    else:
+        r = (c - x) / (c - c0) * hc
+
+    return r
+
+x = np.linspace(0, 2, 1000)
+y = np.array([triangle_wave(t, 0.6, 0.4, 1.0) for t in x])
+print y
+
+
+triangle_ufunc = np.frompyfunc(lambda x: triangle_wave(x, 0.6, 0.4, 1.0), 1, 1)
+y2 = triangle_ufunc(x)
+print y2
+
+def triangle_wave_2(c, c0, hc):
+
+    def triangle_func(x):
+
+        x -= int(x)
+        if x >= c:
+            r = 0.0
+
+        elif x < c0:
+            r = x / c0 * hc
+
+        else:
+            r = (c - x) / (c - c0) * hc
+
+        return r
+
+    return np.frompyfunc(triangle_func, 1, 1)
+
+y3 = triangle_wave_2(0.6, 0.4, 1.0)(x)
+print y3
+
+
+a = np.arange(0, 60, 10).reshape(-1, 1)
+print a
+print a.shape
+
+b = np.arange(0, 5)
+print b
+print b.shape
+
+c = a + b
+print c
+print c.shape
+
+x, y = np.ogrid[0:5, 0:5]
+print x
+print y
+
+x, y = np.ogrid[0:1:4j, 0:1:3j]
+print x
+print y
+
+from mayavi import mlab
+x, y = np.ogrid[-2:2:20j, -2:2:20j]
+z = x * np.exp(- x ** 2 - y ** 2)
+
+pl = mlab.surf(x, y, z, wrap_scale="auto")
+mlab.axes(xlabel='x', ylabel='y', zlabel='z')
+mlab.outline(pl)
+
