@@ -251,7 +251,6 @@ print y
 x, y = np.ogrid[0:1:4j, 0:1:3j]
 print x
 print y
-
 from mayavi import mlab
 x, y = np.ogrid[-2:2:20j, -2:2:20j]
 z = x * np.exp(- x ** 2 - y ** 2)
