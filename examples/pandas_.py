@@ -27,5 +27,22 @@ print s4
 print pd.isnull(s4)
 print s4.isnull()
 
-s4.index = ["p1", "p2", "p3", "p4"]
+s4.index = ["p1", "p2", "p3"]
 print s4
+
+
+data = {"name": ["yahoo", "facebook", "google"], "marks": [200, 400, 800], "price": [9, 3, 7]}
+f1 = DataFrame(data)
+print f1
+
+f2 = DataFrame(data, columns=["name", "marks", "price"])
+print f2
+
+f3 = DataFrame(data, columns=["name", "marks", "price", "debt"], index=["a", "b", "c"])
+print f3
+
+new_data = {"lang": {"firstline": "python", "secondline": "go"}, "price": {"firstline": 8000}}
+f4 = DataFrame(new_data)
+print f4
+
+
