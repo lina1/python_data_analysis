@@ -45,4 +45,15 @@ new_data = {"lang": {"firstline": "python", "secondline": "go"}, "price": {"firs
 f4 = DataFrame(new_data)
 print f4
 
+f3["debt"] = 89.2
+print f3
+
+sdebt = Series([2.2, 3.3], index=["a", "c"])
+f3["debt"] = sdebt
+print f3
+
+# there is a warning
+# f3["price"]["a"] = 5
+# print f3
+
 
